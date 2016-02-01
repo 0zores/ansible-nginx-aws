@@ -1,3 +1,5 @@
 ---
 nginx_site_aval: /etc/nginx/sites-available
 nginx_site_enabled: /etc/nginx/sites-enabled
+key_file: /etc/ssl/server.key
+cert_file: /etc/ssl/server.crt

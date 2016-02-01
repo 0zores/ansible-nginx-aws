@@ -1,8 +1,20 @@
 server {
+    listen      80;
+    server_name {{ host_name }} localhost;
+
+    location / {
+      rewrite     ^(.*)   https://{{ host_name }}$1 permanent;
+}
+
+server {
         listen  443;
         server_name {{ host_name }} localhost;
 
         access_log  /var/log/nginx/page.access.log;
+
+        ssl    on;
+        ssl_certificate    {{ cert_file }};
+        ssl_certificate_key    {{ key_file }};
 
         root   {{ document_root }};
         index  index.html index.htm index.php;
