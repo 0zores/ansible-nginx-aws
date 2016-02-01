@@ -1,0 +1,9 @@
+- hosts: sa-east-1
+  user: ec2-user
+  sudo: True
+  vars_files:
+    - vars/global.yml
+  roles:
+    - common
+    - php
+    - nginx

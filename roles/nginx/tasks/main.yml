@@ -1,0 +1,22 @@
+---
+- name: "NGINX | Adding nginx repo"
+  apt_repository: repo='deb http://nginx.org/packages/ubuntu/ trusty nginx' state=present update_cache=yes
+
+- name: "NGINX | Install nginx and dependencies"
+  apt: name=nginx state=latest update_cache=yes install_recommends=yes
+  notify: "restart nginx"
+
+- name: "NGINX | Config the page vhost"
+  template: src=page.j2 dest={{ nginx_site_aval }}/page
+  notify: "restart nginx"
+
+- name: "NGINX | Remove default vhost"
+  file: path={{ nginx_site_enabled }}/default state=absent
+  notify: "restart nginx"
+
+- name: "NGINX | Activate page vhost"
+  file: src={{ nginx_site_aval }}/page dest={{ nginx_site_enabled }}/page state=link
+  notify: "restart nginx"
+
+- name: "NGINX | Create index.php"
+  template: src=index.php dest={{ document_root }}

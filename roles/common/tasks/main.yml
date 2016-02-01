@@ -1,0 +1,15 @@
+---
+- name: "COMMON | Change hostname"
+  hostname: name={{ host_name }}
+
+- name: "COMMON | Config ulimit"
+  template: src=limits.conf.j2 dest={{ ulimit_config }}
+
+- name: "COMMON | Remove already exist {{ document_root }}"
+  file: src={{ document_root }} state=absent
+
+- name: "COMMON | Create {{ document_root }} again"
+  file: src={{ document_root }} state=absent
+
+- name: "COMMON | Mount /dev/sdh"
+  mount: name={{ document_root }} src={{ device }} fstype=xfs opts=defaults state=present

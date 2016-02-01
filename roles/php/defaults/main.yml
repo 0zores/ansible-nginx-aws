@@ -1,0 +1,7 @@
+---
+fpm_max_children: 40
+fpm_start_servers: 20
+fpm_max_servers: 60
+fpm_max_requests: 500
+fpm_listen: /var/run/php5-fpm.sock
+php_opcache: 1

@@ -1,0 +1,5 @@
+---
+device: /dev/sdh
+ulimit_config: /etc/security/limits.conf
+root_ulimit: 4096
+www_ulimit: 65535
